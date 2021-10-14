@@ -1,0 +1,29 @@
+type DepositRecord @entity {
+    id: ID!
+    transaction: Bytes!
+
+    amount: BigInt
+    depositor: Bytes
+    destinationChainId: Int
+    destinationRecipient: Bytes
+    nonce: BigInt
+    resourceId: Bytes
+}
+
+type ProposalPassed @entity {
+    id: ID!
+
+    depositNonce: BigInt!
+    originChainId: Int!
+    resourceId: Bytes!
+}
+
+type ProposalExecuted @entity {
+    id: ID!
+
+    depositNonce: BigInt!
+    originChainId: Int!
+    resourceId: Bytes!
+
+    executedAt: Bytes!
+}

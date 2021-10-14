@@ -1,0 +1,29 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: bridge
+    network: mainnet
+    source:
+      address: "0xC84456ecA286194A201F844993C220150Cf22C63"
+      abi: bridge
+      startBlock: 12935211 # deployment height
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      abis:
+        - name: bridge
+          file: ./abis/bridge.json
+        - name: erc20AssetHandler
+          file: ./abis/erc20assethandler.json
+      entities:
+        - DepositRecord
+        - Proposal
+      eventHandlers:
+        - event: "Deposit(indexed uint8,indexed bytes32,indexed uint64)"
+          handler: handleDepositEvent
+        - event: "ProposalEvent(indexed uint8,indexed uint64,indexed uint8,bytes32,bytes32)"
+          handler: handleProposalEvent
+      file: ./src/mapping.ts
