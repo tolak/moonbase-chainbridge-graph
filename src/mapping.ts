@@ -16,6 +16,7 @@ export function handleDepositEvent(event: Deposit): void {
     deposit.nonce = event.params.depositNonce
     deposit.resourceId = event.params.resourceID
     deposit.transaction = event.transaction.hash
+    deposit.timestamp = event.block.timestamp
     deposit.save()
 
     let bridge = Bridge.bind(event.address)
@@ -40,6 +41,7 @@ export function handleProposalEvent(event: ProposalEvent): void {
         record.executedAt = event.transaction.hash
         record.originChainId = originChainId
         record.resourceId = resourceId
+        record.timestamp = event.block.timestamp
         record.save()
     }
 
@@ -48,6 +50,7 @@ export function handleProposalEvent(event: ProposalEvent): void {
         record.depositNonce = depositNonce
         record.originChainId = originChainId
         record.resourceId = resourceId
+        record.timestamp = event.block.timestamp
         record.save()
     }
 }
