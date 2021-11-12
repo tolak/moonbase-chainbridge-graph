@@ -8,6 +8,7 @@ type DepositRecord @entity {
     destinationRecipient: Bytes
     nonce: BigInt
     resourceId: Bytes
+    timestamp: BigInt!
 }
 
 type ProposalPassed @entity {
@@ -16,6 +17,7 @@ type ProposalPassed @entity {
     depositNonce: BigInt!
     originChainId: Int!
     resourceId: Bytes!
+    timestamp: BigInt!
 }
 
 type ProposalExecuted @entity {
@@ -26,4 +28,5 @@ type ProposalExecuted @entity {
     resourceId: Bytes!
 
     executedAt: Bytes!
+    timestamp: BigInt!
 }
