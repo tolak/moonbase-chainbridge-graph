@@ -4,10 +4,14 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: bridge
-    network: mainnet
+    network: mainnet # set to {rinkeby} in test env
     source:
+      # mainnet: "0xC84456ecA286194A201F844993C220150Cf22C63"
+      # rinkeby: "0x0712Cf53B9fA1A33018d180a4AbcC7f1803F55f4"
       address: "0xC84456ecA286194A201F844993C220150Cf22C63"
       abi: bridge
+      # mainnet: 12935211
+      # rinkeby: 9687291
       startBlock: 12935211 # deployment height
     mapping:
       kind: ethereum/events
@@ -15,15 +19,17 @@ dataSources:
       language: wasm/assemblyscript
       abis:
         - name: bridge
-          file: ./abis/bridge.json
+          file: ./abis/Bridge.json
         - name: erc20AssetHandler
-          file: ./abis/erc20assethandler.json
+          file: ./abis/ERC20Handler.json
       entities:
         - DepositRecord
         - Proposal
       eventHandlers:
         - event: "Deposit(indexed uint8,indexed bytes32,indexed uint64)"
-          handler: handleDepositEvent
+          handler: handleDeposit
         - event: "ProposalEvent(indexed uint8,indexed uint64,indexed uint8,bytes32,bytes32)"
           handler: handleProposalEvent
+        - event: "ProposalVote(indexed uint8,indexed uint64,indexed uint8,bytes32)"
+          handler: handleProposalVote
       file: ./src/mapping.ts

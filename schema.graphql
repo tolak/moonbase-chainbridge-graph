@@ -1,32 +1,50 @@
-type DepositRecord @entity {
-    id: ID!
-    transaction: Bytes!
+enum ProposalStatus {
+    Inactive
+    Active
+    Passed
+    Executed
+    Cancelled
+}
 
+type Tx @entity {
+    id: ID!
+    hash: String!
+    sender: String!
+}
+
+type BridgeOutboundingRecord @entity {
+    id: ID!
+    createdAt: BigInt!
+
+    # destChainId and depositNonce can be used to track
+    # crosschain transfer status on dest chain
+    destChainId: Int! @index
+    depositNonce: BigInt! @index
+
+    resourceId: String! @index
     amount: BigInt
-    depositor: Bytes
-    destinationChainId: Int
-    destinationRecipient: Bytes
-    nonce: BigInt
-    resourceId: Bytes
-    timestamp: BigInt!
+    recipient: String @index
+
+    # The deposit transaction send by user
+    sendTx: Tx
+    # Sender can be used to construct user transaction history
+    sender: String @index
 }
 
-type ProposalPassed @entity {
+type BridgeInboundingRecord @entity {
     id: ID!
+    createdAt: BigInt!
 
-    depositNonce: BigInt!
-    originChainId: Int!
-    resourceId: Bytes!
-    timestamp: BigInt!
-}
+    # Origin chain can use destChainId and depositNonce to track
+    # crosschain transfer status on this chain
+    originChainId: Int! @index
+    depositNonce: BigInt! @index
 
-type ProposalExecuted @entity {
-    id: ID!
-
-    depositNonce: BigInt!
-    originChainId: Int!
-    resourceId: Bytes!
-
-    executedAt: Bytes!
-    timestamp: BigInt!
+    resourceId: String! @index
+    # Proposal status being updated when vote happened
+    status: ProposalStatus
+    # Relayers vote transaction
+    voteTxs: [Tx!]!
+    # Relayer execution transaction
+    executeTx: Tx
 }
