@@ -1,13 +1,13 @@
 {
-  "name": "khala-chainbridge-graph",
+  "name": "moonbase-chainbridge-graph",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ khala-chainbridge-graph",
-    "create-local": "graph create --node http://localhost:8020/ khala-chainbridge-graph",
-    "remove-local": "graph remove --node http://localhost:8020/ khala-chainbridge-graph",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 khala-chainbridge-graph"
+    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ moonbase-chainbridge-graph",
+    "create-local": "graph create --node http://localhost:8020/ moonbase-chainbridge-graph",
+    "remove-local": "graph remove --node http://localhost:8020/ moonbase-chainbridge-graph",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 moonbase-chainbridge-graph"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "^0.25.3",
