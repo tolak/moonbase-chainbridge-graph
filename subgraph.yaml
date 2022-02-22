@@ -8,13 +8,13 @@ dataSources:
     source:
       # mainnet: "0xC84456ecA286194A201F844993C220150Cf22C63"
       # rinkeby: "0x0712Cf53B9fA1A33018d180a4AbcC7f1803F55f4"
-      # moonbase: "0xF7ECD4d4ddA82f7f9c1B96D179c00e2Bfb448563"
-      address: "0xF7ECD4d4ddA82f7f9c1B96D179c00e2Bfb448563"
+      # moonbase: "0x1e4ED6d37685D2FB254e47C5b58Cf95173326E4c"
+      address: "0x1e4ED6d37685D2FB254e47C5b58Cf95173326E4c"
       abi: bridge
       # mainnet: 12935211
       # rinkeby: 9687291
-      # moonbase: 1517037
-      startBlock: 1517037 # deployment height
+      # moonbase: 1735494
+      startBlock: 1735494 # deployment height
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -28,10 +28,10 @@ dataSources:
         - DepositRecord
         - Proposal
       eventHandlers:
-        - event: "Deposit(indexed uint8,indexed bytes32,indexed uint64)"
+        - event: Deposit(indexed uint8,indexed bytes32,indexed uint64)
           handler: handleDeposit
-        - event: "ProposalEvent(indexed uint8,indexed uint64,indexed uint8,bytes32,bytes32)"
+        - event: ProposalEvent(indexed uint8,indexed uint64,indexed uint8,bytes32,bytes32)
           handler: handleProposalEvent
-        - event: "ProposalVote(indexed uint8,indexed uint64,indexed uint8,bytes32)"
+        - event: ProposalVote(indexed uint8,indexed uint64,indexed uint8,bytes32)
           handler: handleProposalVote
       file: ./src/mapping.ts
