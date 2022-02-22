@@ -49,7 +49,7 @@ function createRecordByProposalEvent(event: ProposalEvent): void {
     record.depositNonce = depositNonce
     record.resourceId = resourceId.toHexString()
 
-    record.status = event.params.status.toString()
+    record.status = 'Inactive'
     record.save()
 }
 
