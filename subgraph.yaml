@@ -35,3 +35,34 @@ dataSources:
         - event: ProposalVote(indexed uint8,indexed uint64,indexed uint8,bytes32)
           handler: handleProposalVote
       file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: ERC20Handler
+    network: mbase # set to {rinkeby} in test env
+    source:
+      # mainnet: ""
+      # rinkeby: ""
+      # moonbase: "0x0B674CC89F54a47Be4Eb6C1A125bB8f04A529181"
+      address: "0x0B674CC89F54a47Be4Eb6C1A125bB8f04A529181"
+      abi: erc20AssetHandler
+      # mainnet: 
+      # rinkeby: 
+      # moonbase: 1735496
+      startBlock: 1735496 # deployment height
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      abis:
+        - name: bridge
+          file: ./abis/Bridge.json
+        - name: erc20AssetHandler
+          file: ./abis/ERC20Handler.json
+      entities:
+        - ERC20Deposited
+        - ERC20Withdrawn
+      eventHandlers:
+        - event: Deposited(indexed address,indexed address,uint256)
+          handler: handleERC20Deposited
+        - event: Withdrawn(indexed address,indexed address,uint256)
+          handler: handleERC20Withdrawn
+      file: ./src/mapping.ts

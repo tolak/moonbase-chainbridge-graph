@@ -48,3 +48,21 @@ type BridgeInboundingRecord @entity {
     # Relayer execution transaction
     executeTx: Tx
 }
+
+type ERC20Deposited @entity {
+    id: ID!
+    createdAt: BigInt!
+
+    token: String! @index
+    recipient: String! @index
+    amount: BigInt!
+}
+
+type ERC20Withdrawn @entity {
+    id: ID!
+    createdAt: BigInt!
+
+    token: String! @index
+    depositer: String! @index
+    amount: BigInt!
+}

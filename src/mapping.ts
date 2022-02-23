@@ -1,6 +1,6 @@
 import { bridge as Bridge, Deposit, ProposalEvent, ProposalVote } from '../generated/bridge/bridge'
-import { erc20AssetHandler as Erc20AssetHandler } from '../generated/bridge/erc20AssetHandler'
-import { Tx, BridgeOutboundingRecord, BridgeInboundingRecord } from '../generated/schema'
+import { erc20AssetHandler as Erc20AssetHandler, Deposited, Withdrawn} from '../generated/bridge/erc20AssetHandler'
+import { Tx, BridgeOutboundingRecord, BridgeInboundingRecord, ERC20Deposited, ERC20Withdrawn} from '../generated/schema'
 
 enum ProposalStatus {
     Inactive,
@@ -154,4 +154,12 @@ export function handleProposalVote(event: ProposalVote): void {
 
         record.save()
     }
+}
+
+export function handleERC20Deposited(event: Deposited): void {
+
+}
+
+export function handleERC20Withdrawn(event: Withdrawn): void {
+
 }
